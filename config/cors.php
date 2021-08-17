@@ -6,7 +6,7 @@ return [
     'allowed_origins' => ['*'],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
-    'exposed_headers' => ['Access-Control-Allow-Origin'],
+    'exposed_headers' => false,
     'max_age' => false,
     'supports_credentials' => false,
 ];
