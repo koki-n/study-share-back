@@ -15,10 +15,10 @@ class CreateUserInfosTable extends Migration
     {
         Schema::create('user_infos', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->text('name')->nullable();
             $table->text('goal')->nullable();
             $table->text('path')->nullable();
-            $table->text('uid');
+            $table->text('uid')->nullable();
             $table->timestamps();
         });
     }

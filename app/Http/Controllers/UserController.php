@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\UserInfo;
 use App\Models\Comment;
@@ -63,16 +64,27 @@ class UserController extends Controller
 
 
         // if ($request->file) {
-        $file_name = time() . '.' . $request->file->getClientOriginalName();
-        $request->file->storeAs('public', $file_name);
+        // $file_name = time() . '.' . $request->file->getClientOriginalName();
+        // $request->file->storeAs('public', $file_name);
         $info = new UserInfo();
-        $info->path = 'storage/' . $file_name;
-        $info->name = $request->name;
-        $info->uid = $request->uid;
-        $info->goal = $request->goal;
+        $image = $request->file;
+        $disk = Storage::disk('s3');
+        $path = $disk->putFile('/', $image, 'public');
+        $info->path = Storage::disk('s3')->url($path);
         $info->save();
-        // それぞれのテーブルに保存
-        $path = 'storage/' . $file_name;
+        $test = UserInfo::all();
+
+        // $file = $params['file'];
+        // //バケットにフォルダを作ってないとき(裸で保存)
+        // $path = Storage::disk('s3')->put('/', $file, 'public');
+        // //バケットに「test」フォルダを作っているとき
+        // $path = Storage::disk('s3')->put('/test', $file, 'public');
+        // $info->path = 'storage/' . $file_name;
+        // $info->name = $request->name;
+        // $info->uid = $request->uid;
+        // $info->goal = $request->goal;
+        // // それぞれのテーブルに保存
+        // $path = 'storage/' . $file_name;
         Comment::where('uid', $request->uid)->update(['path' => $path]);
         post::where('uid', $request->uid)->update(['path' => $path]);
 
@@ -80,6 +92,23 @@ class UserController extends Controller
         return response()->json([
             'data' => $request->all()
         ], 200);
+        // $file_name = time() . '.' . $request->file->getClientOriginalName();
+        // $request->file->storeAs('public', $file_name);
+        // $info = new UserInfo();
+        // $info->path = 'storage/' . $file_name;
+        // $info->name = $request->name;
+        // $info->uid = $request->uid;
+        // $info->goal = $request->goal;
+        // $info->save();
+        // // それぞれのテーブルに保存
+        // $path = 'storage/' . $file_name;
+        // Comment::where('uid', $request->uid)->update(['path' => $path]);
+        // post::where('uid', $request->uid)->update(['path' => $path]);
+
+
+        // return response()->json([
+        //     'data' => $request->all()
+        // ], 200);
 
 
         // return ['success' => '登録しました!'];
