@@ -14,7 +14,7 @@ class CommentController extends Controller
     {
         $items = post::find('request->comment');
         return response()->json([
-            'data' => $request->comment
+            'data' => $items
         ], 200);
     }
 
