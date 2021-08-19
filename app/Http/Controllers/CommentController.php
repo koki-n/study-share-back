@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     public function show(Request $request)
     {
-        $items = post::with('comment')->get();
+        $items = post::find('request->comment');
         return response()->json([
             'data' => $request->comment
         ], 200);
