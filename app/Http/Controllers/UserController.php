@@ -55,9 +55,9 @@ class UserController extends Controller
         // return response()->json([
         //     'data' => $request->all()
         // ], 200);
-        return response()->json([
-            'data' => $request->all()
-        ], 200);
+        // return response()->json([
+        //     'data' => $request->all()
+        // ], 200);
 
 
         $test = UserInfo::where('uid', $request->uid)->get();
@@ -76,6 +76,9 @@ class UserController extends Controller
         $disk = Storage::disk('s3');
         $path = $disk->putFile('/', $image, 'public');
         $info->path = Storage::disk('s3')->url($path);
+        $info->name = $request->name;
+        $info->uid = $request->uid;
+        $info->goal = $request->goal;
         $info->save();
         $test = UserInfo::all();
 
