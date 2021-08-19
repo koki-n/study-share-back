@@ -14,7 +14,7 @@ class CommentController extends Controller
     {
         $items = post::with('comment')->get();
         return response()->json([
-            'data' => $items
+            'data' => $request->comment
         ], 200);
     }
 
