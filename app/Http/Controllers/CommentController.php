@@ -10,7 +10,7 @@ use App\Models\UserInfo;
 
 class CommentController extends Controller
 {
-    public function index(Request $request)
+    public function show(Request $request)
     {
         $items = post::with('comment')->get();
         return response()->json([
