@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $item = UserInfo::where('uid', $request->user)->first();
         return response()->json([
-            'data' => $request->uid
+            'data' => $item
         ], 200);
     }
     // public function store(Request $request)
