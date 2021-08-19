@@ -20,13 +20,11 @@ class UserController extends Controller
             'data' => $item
         ], 200);
     }
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
-        // $item = UserInfo::create($request->all());
-        // $item = UserInfo::where('uid', $request->uid);
-        $item = UserInfo::all();
+        $item = UserInfo::where('uid', $request->user)->first();
         return response()->json([
-            'data' => $id
+            'data' => $item
         ], 200);
     }
     // public function store(Request $request)
