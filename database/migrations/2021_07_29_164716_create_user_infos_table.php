@@ -18,7 +18,7 @@ class CreateUserInfosTable extends Migration
             $table->text('name')->nullable();
             $table->text('goal')->nullable();
             $table->text('path')->nullable();
-            $table->text('uid')->nullable();
+            $table->text('uid');
             $table->timestamps();
         });
     }
