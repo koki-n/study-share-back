@@ -55,11 +55,16 @@ class UserController extends Controller
         // return response()->json([
         //     'data' => $request->all()
         // ], 200);
+        return response()->json([
+            'data' => $request->all()
+        ], 200);
+
 
         $test = UserInfo::where('uid', $request->uid)->get();
         if (!empty($test) == true) {
             UserInfo::where('uid', $request->uid)->delete();
         }
+
 
 
 
