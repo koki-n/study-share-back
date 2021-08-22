@@ -34,8 +34,6 @@ class PostController extends Controller
     }
     public function show(Post $post)
     {
-        // dd($post);
-        // $item = post::where('uid',);
         return response()->json([
             'data' => 'seikou'
         ], 201);

@@ -25,18 +25,11 @@ class SearchController extends Controller
 
         if (!empty($title) == true) {
             $items = $items->where('title', 'like', "%$title%");
-            // dd($name);
         }
         if (!empty($content) == true) {
             $items = $items->where('content', 'like', "%$content%");
-
-            // dd($name);
         }
         $items = $items->get();
-
-
-
-        // $item = post::create($request->all());
         return response()->json([
             'data' => $items
         ], 201);
